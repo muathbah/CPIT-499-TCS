@@ -215,7 +215,7 @@ public class Authenticate_login extends javax.swing.JFrame {
 
             }
         });
-        Thread.sleep(35000);
+        Thread.sleep(6000);
         System.out.println("yours user ID: " + temp_account.getAccount_ID());
         System.out.println("yours password: " + temp_account.getPassword());
         System.out.println("yours privilage: " + temp_account.getPriv());

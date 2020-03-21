@@ -326,8 +326,8 @@ public class Create_account extends javax.swing.JFrame {
     }
 
     public boolean check_userID(String user_id) throws InterruptedException {
-        temp_account = new Account();
-        temp_account.setAccount_ID("0");
+        Account check_account = new Account();
+        check_account.setAccount_ID("0");
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Database/accounts/" + acc.getAccount_ID() + "/account_ID");
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -336,7 +336,7 @@ public class Create_account extends javax.swing.JFrame {
                 // Get Post object and use the values to update the UI
 
                 // temp_userID = ds.getChildren().toString();
-                temp_account.setAccount_ID(ds.getValue(String.class));
+                check_account.setAccount_ID(ds.getValue(String.class));
                 // ...
             }
 
@@ -345,10 +345,10 @@ public class Create_account extends javax.swing.JFrame {
 
             }
         });
-        Thread.sleep(40000);
-        if (temp_account.getAccount_ID() == null) {
+        Thread.sleep(6000);
+        if (check_account.getAccount_ID() == null) {
             return true;
-        } else if (temp_account.getAccount_ID().equals(user_id)) {
+        } else if (check_account.getAccount_ID().equals(user_id)) {
             return false;
         } else {
             return true;

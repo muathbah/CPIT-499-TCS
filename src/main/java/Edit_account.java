@@ -233,7 +233,7 @@ public class Edit_account extends javax.swing.JFrame {
 
             }
         });
-        Thread.sleep(35000);
+        Thread.sleep(6000);
         System.out.println("yours user ID: " + temp_account.getAccount_ID());
         System.out.println("yours password: " + temp_account.getPassword());
         System.out.println("yours privilage: " + temp_account.getPriv());
@@ -252,13 +252,13 @@ public class Edit_account extends javax.swing.JFrame {
         //read_value(user_id);
 
         if (check_userID(user_id)) {
-            Edit_account_after_access e = new Edit_account_after_access(record);
+            Edit_account_after_access e = new Edit_account_after_access(record , temp_account);
             e.setVisible(true);
             this.setVisible(false);
         } else {
             Component frame = null;
             JOptionPane.showMessageDialog(frame,
-                    "This ID "+record.getAccount_ID()+" is not exist",
+                    "This ID "+jTextField1.getText()+" is not exist",
                     "ID not found",
                     JOptionPane.ERROR_MESSAGE);
 

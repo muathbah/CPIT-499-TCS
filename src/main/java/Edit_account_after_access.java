@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class Edit_account_after_access extends javax.swing.JFrame {
 
     private DatabaseReference mDatabase, mDatabase_for_other_accounts;
-    static Account record, other_account;
+    static Account record, other_account , temp_account;
     Account new_account;
 
     /**
@@ -31,12 +31,14 @@ public class Edit_account_after_access extends javax.swing.JFrame {
         initComponents();
     }
 
-    Edit_account_after_access(Account record) {
+    Edit_account_after_access(Account record , Account temp_account) {
         initComponents();
         Edit_account_after_access.record = record;
-        jLabel1.setText("User ID: " + record.getAccount_ID());
+        Edit_account_after_access.temp_account = temp_account;
+        jLabel1.setText("User ID: " + temp_account.getAccount_ID());
 
         jLabel9.setText(record.getAccount_ID());
+        jLabel18.setText(record.getAccount_ID());
         jLabel10.setText(record.getFirst_name());
         jLabel11.setText(record.getLast_name());
         jLabel12.setText(record.getPassword());
@@ -70,7 +72,6 @@ public class Edit_account_after_access extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -82,6 +83,7 @@ public class Edit_account_after_access extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,8 +113,6 @@ public class Edit_account_after_access extends javax.swing.JFrame {
         jLabel7.setText("Privilage:");
 
         jLabel8.setText("current values");
-
-        jTextField1.setText("Enter New ID");
 
         jTextField2.setText("Enter First Name");
 
@@ -187,13 +187,13 @@ public class Edit_account_after_access extends javax.swing.JFrame {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPasswordField2)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -206,29 +206,26 @@ public class Edit_account_after_access extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel15))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel15))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField2)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
@@ -277,112 +274,45 @@ public class Edit_account_after_access extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Edit_account e = new Edit_account(record);
+        Edit_account e = new Edit_account(temp_account);
         e.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        try {
-            String password_after_checking = confirm_password(jPasswordField1.getText(), jPasswordField2.getText());
-
-            privilage priv = new privilage();
-            new_account = new Account(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), password_after_checking,
-                    jTextField4.getText(), priv.get_privilage(jCheckBox1.isSelected(), jCheckBox2.isSelected(), jCheckBox3.isSelected(), jCheckBox4.isSelected()));
-            String result = check_userID(new_account.getAccount_ID());
-            if (result.equals("11")) {
-                if (password_after_checking != null) {
-
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Database/accounts/" + record.getAccount_ID());
-
-                    mDatabase.setValue(new_account, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError de, DatabaseReference dr) {
-
-                        }
-                    });
-
-                    Component frame = null;
-                    JOptionPane.showMessageDialog(frame,
-                            "The account has been Updated successfully ^_^");
-
-                } else if(result.equals("10")) {
-                    Component frame = null;
-                    JOptionPane.showMessageDialog(frame,
-                            "The new user ID (" + new_account.getAccount_ID() + ") is already exist",
-                            "Wrong input",
-                            JOptionPane.ERROR_MESSAGE);
-                }else if (result.equals("01")){
-                    Component frame = null;
-                    JOptionPane.showMessageDialog(frame,
-                            "The new user ID (" + new_account.getAccount_ID() + ") is not in the database",
-                            "Wrong input",
-                            JOptionPane.ERROR_MESSAGE);
-                }else if (result.equals("00")){
-                    Component frame = null;
-                    JOptionPane.showMessageDialog(frame,
-                            "Connection went wrong...",
-                            "Try again please",
-                            JOptionPane.ERROR_MESSAGE);
+        String password_after_checking = confirm_password(jPasswordField1.getText(), jPasswordField2.getText());
+        privilage priv = new privilage();
+        new_account = new Account(record.getAccount_ID(), jTextField2.getText(), jTextField3.getText(), password_after_checking,
+                jTextField4.getText(), priv.get_privilage(jCheckBox1.isSelected(), jCheckBox2.isSelected(), jCheckBox3.isSelected(), jCheckBox4.isSelected()));
+        
+        if (password_after_checking != null) {
+            
+            mDatabase = FirebaseDatabase.getInstance().getReference().child("Database/accounts/" + record.getAccount_ID());
+            
+            mDatabase.setValue(new_account, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError de, DatabaseReference dr) {
+                    
                 }
-
-            } else {
-                Component frame = null;
-                JOptionPane.showMessageDialog(frame,
-                        "The password you have entered didn't match...",
-                        "Wrong password",
-                        JOptionPane.ERROR_MESSAGE);
-
-            }
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Edit_account_after_access.class.getName()).log(Level.SEVERE, null, ex);
+            });
+            
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame,
+                    "The account has been Updated successfully ^_^");
+            
+        } else {
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame,
+                    "The password you have entered didn't match...",
+                    "Wrong password",
+                    JOptionPane.ERROR_MESSAGE);
+            
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public String check_userID(String user_id) throws InterruptedException {
-        other_account = new Account();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Database/accounts/" + record.getAccount_ID() + "/account_ID");
-        mDatabase_for_other_accounts = FirebaseDatabase.getInstance().getReference().child("Database/accounts/" + jTextField1.getText() + "/account_ID");
-
-        mDatabase_for_other_accounts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot ds) {
-                other_account.setAccount_ID(ds.getValue(String.class));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError de) {
-
-            }
-        });
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot ds) {
-                record.setAccount_ID(ds.getValue(String.class));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError de) {
-
-            }
-        });
-        Thread.sleep(35000);
-        if (record.getAccount_ID() == null) {
-            return "00";
-        } else if (record.getAccount_ID().equals(new_account.getAccount_ID())) {
-            return "11";
-            //update same ID
-        } else if (new_account.getAccount_ID().equals(other_account.getAccount_ID())) {
-            return "10";
-        } else if (other_account.getAccount_ID() == null) {
-            return "01";
-            //there are no ID in this table
-        }
-        return "00";
-    }
+   
 
     public String confirm_password(String first_password, String sec_password) {
 
@@ -444,6 +374,7 @@ public class Edit_account_after_access extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -454,7 +385,6 @@ public class Edit_account_after_access extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
