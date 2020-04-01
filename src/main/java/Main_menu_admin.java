@@ -50,7 +50,6 @@ public class Main_menu_admin extends javax.swing.JFrame {
         Button2 = new javax.swing.JButton();
         Button4 = new javax.swing.JButton();
         Button5 = new javax.swing.JButton();
-        Button6 = new javax.swing.JButton();
         Button7 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -91,13 +90,6 @@ public class Main_menu_admin extends javax.swing.JFrame {
         Button5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Button5ActionPerformed(evt);
-            }
-        });
-
-        Button6.setText("Add new road");
-        Button6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Button6ActionPerformed(evt);
             }
         });
 
@@ -147,9 +139,7 @@ public class Main_menu_admin extends javax.swing.JFrame {
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Button6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Button5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Button5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(Button7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,7 +160,6 @@ public class Main_menu_admin extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button2)
-                    .addComponent(Button6)
                     .addComponent(jButton1))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -220,12 +209,6 @@ public class Main_menu_admin extends javax.swing.JFrame {
         anr.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_Button5ActionPerformed
-
-    private void Button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button6ActionPerformed
-        Add_new_road anr = new Add_new_road();
-        anr.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_Button6ActionPerformed
 
     private void Button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button7ActionPerformed
         System.exit(0);
@@ -288,7 +271,6 @@ this.setVisible(false);
     private javax.swing.JButton Button3;
     private javax.swing.JButton Button4;
     private javax.swing.JButton Button5;
-    private javax.swing.JButton Button6;
     private javax.swing.JButton Button7;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

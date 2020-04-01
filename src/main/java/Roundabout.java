@@ -1,12 +1,53 @@
 public class Roundabout {
    String Roundabout_ID;
    String Roundabout_name;
-   String number_of_entries;
+   String North_street;
+   String East_street;
+   String South_street;
+   String West_street;
 
-    public Roundabout(String Roundabout_ID, String Roundabout_name, String number_of_entries) {
+    public Roundabout() {
+    }
+
+    public Roundabout(String Roundabout_ID, String Roundabout_name, String North_street, String East_street, String South_street, String West_street) {
         this.Roundabout_ID = Roundabout_ID;
         this.Roundabout_name = Roundabout_name;
-        this.number_of_entries = number_of_entries;
+        this.North_street = North_street;
+        this.East_street = East_street;
+        this.South_street = South_street;
+        this.West_street = West_street;
+    }
+
+    public String getNorth_street() {
+        return North_street;
+    }
+
+    public void setNorth_street(String North_street) {
+        this.North_street = North_street;
+    }
+
+    public String getEast_street() {
+        return East_street;
+    }
+
+    public void setEast_street(String East_street) {
+        this.East_street = East_street;
+    }
+
+    public String getSouth_street() {
+        return South_street;
+    }
+
+    public void setSouth_street(String South_street) {
+        this.South_street = South_street;
+    }
+
+    public String getWest_street() {
+        return West_street;
+    }
+
+    public void setWest_street(String West_street) {
+        this.West_street = West_street;
     }
 
     public String getRoundabout_ID() {
@@ -25,11 +66,5 @@ public class Roundabout {
         this.Roundabout_name = Roundabout_name;
     }
 
-    public String getNumber_of_entries() {
-        return number_of_entries;
-    }
-
-    public void setNumber_of_entries(String number_of_entries) {
-        this.number_of_entries = number_of_entries;
-    }
+    
 }
