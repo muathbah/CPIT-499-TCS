@@ -1,3 +1,4 @@
+
 import java.awt.Component;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -52,8 +53,18 @@ public class Select_mode extends javax.swing.JFrame {
         jLabel1.setText("Select mode to manage the traffic:");
 
         Button1.setText("Auto mode");
+        Button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button1ActionPerformed(evt);
+            }
+        });
 
         Button2.setText("Manual mode");
+        Button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button2ActionPerformed(evt);
+            }
+        });
 
         Button3.setText("Back");
         Button3.addActionListener(new java.awt.event.ActionListener() {
@@ -105,20 +116,36 @@ public class Select_mode extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button3ActionPerformed
-        
-                        if (temp_account.getPriv().equals("1111")) {
-                            Main_menu_admin menu = new Main_menu_admin(temp_account);
-                            menu.setVisible(true);
-                            this.setVisible(false);
 
-                        } else if (temp_account.getPriv().charAt(2) == '1' || temp_account.getPriv().charAt(3) == '1') {
-                            Main_menu_operator menu = new Main_menu_operator(temp_account);
-                            menu.setVisible(true);
-                            this.setVisible(false);
-                        }
-                    
+        if (temp_account.getPriv().equals("1111")) {
+            Main_menu_admin menu = new Main_menu_admin(temp_account);
+            menu.setVisible(true);
+            this.setVisible(false);
+
+        } else if (temp_account.getPriv().charAt(2) == '1' || temp_account.getPriv().charAt(3) == '1') {
+            Main_menu_operator menu = new Main_menu_operator(temp_account);
+            menu.setVisible(true);
+            this.setVisible(false);
+        }
+
 
     }//GEN-LAST:event_Button3ActionPerformed
+
+    private void Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button1ActionPerformed
+        Auto_mode am = new Auto_mode(temp_account);
+        am.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_Button1ActionPerformed
+
+    private void Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button2ActionPerformed
+//        try {
+//            Manual_mode m = new Manual_mode(temp_account);
+//            m.setVisible(true);
+//            this.setVisible(false);
+//        } catch (InterruptedException ex) {
+//
+//        }
+    }//GEN-LAST:event_Button2ActionPerformed
 
     /**
      * @param args the command line arguments

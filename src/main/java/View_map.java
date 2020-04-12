@@ -1,21 +1,34 @@
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import java.awt.Color;
+import java.awt.Component;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author KAU
  */
 public class View_map extends javax.swing.JFrame {
+
     static Account temp_Account;
+    private DatabaseReference mDatabase, Roundabout_name_DB, Dir_name_DB_north, distence_DB_north, ID_DB_north, Traffic_light_status_DB_north, Dir_name_DB_east, distence_DB_east, ID_DB_east, Traffic_light_status_DB_east, Dir_name_DB_south, distence_DB_south, ID_DB_south, Traffic_light_status_DB_south, Dir_name_DB_west, distence_DB_west, ID_DB_west, Traffic_light_status_DB_west, flag_DB;
+    static Roundabout temp, current_roundabout;
+    static Direction temp_dir_N, temp_dir_E, temp_dir_S, temp_dir_W;
 
     /**
      * Creates new form View_map1
@@ -23,11 +36,13 @@ public class View_map extends javax.swing.JFrame {
     public View_map() {
         initComponents();
     }
+
     public View_map(Account temp_Account) {
-        
+
         initComponents();
         View_map.temp_Account = temp_Account;
         jLabel2.setText("User ID: " + temp_Account.getAccount_ID());
+
     }
 
     /**
@@ -39,68 +54,420 @@ public class View_map extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        north_lable = new javax.swing.JLabel();
+        east_lable = new javax.swing.JLabel();
+        west_lable = new javax.swing.JLabel();
+        south_lable = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setLayout(null);
+
+        jPanel1.setLayout(null);
+
+        north_lable.setBackground(new java.awt.Color(252, 252, 221));
+        north_lable.setOpaque(true);
+        jPanel1.add(north_lable);
+        north_lable.setBounds(250, 70, 10, 60);
+
+        east_lable.setBackground(new java.awt.Color(255, 255, 255));
+        east_lable.setOpaque(true);
+        jPanel1.add(east_lable);
+        east_lable.setBounds(310, 160, 60, 10);
+
+        west_lable.setBackground(new java.awt.Color(255, 255, 255));
+        west_lable.setOpaque(true);
+        jPanel1.add(west_lable);
+        west_lable.setBounds(150, 175, 60, 10);
+
+        south_lable.setBackground(new java.awt.Color(252, 252, 221));
+        south_lable.setOpaque(true);
+        jPanel1.add(south_lable);
+        south_lable.setBounds(280, 220, 10, 50);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("E:\\downloads from chrome\\Traffic_Control_System_CPIT-499\\Photos\\roundabout on map v2.png")); // NOI18N
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(0, 0, 450, 380);
+
+        jPanel2.add(jPanel1);
+        jPanel1.setBounds(200, 50, 450, 380);
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton4.setText("Start auto mode");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4);
+        jButton4.setBounds(670, 403, 160, 30);
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setText("Change traffic light");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3);
+        jButton3.setBounds(670, 353, 160, 40);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("Load traffic");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(670, 443, 160, 30);
+        jPanel2.add(jTextField1);
+        jTextField1.setBounds(520, 440, 140, 30);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel1.setText("Enter Roundabout ID to load its' traffic:");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(200, 450, 330, 14);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(10, 440, 170, 30);
 
-        jLabel1.setText("jLabel1");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(240, 240, 240));
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(10, 10, 170, 60);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("E:\\downloads from chrome\\Traffic_Control_System_CPIT-499\\Photos\\1.jpg")); // NOI18N
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(0, 0, 850, 480);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 323, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(19, 19, 19))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-                        if (temp_Account.getPriv().equals("1111")) {
-                            Main_menu_admin menu = new Main_menu_admin(temp_Account);
-                            menu.setVisible(true);
-                            this.setVisible(false);
 
-                        } else if (temp_Account.getPriv().charAt(2) == '1' || temp_Account.getPriv().charAt(3) == '1') {
-                            Main_menu_operator menu = new Main_menu_operator(temp_Account);
-                            menu.setVisible(true);
-                            this.setVisible(false);
-                        }
-                    
+        if (temp_Account.getPriv().equals("1111")) {
+            Main_menu_admin menu = new Main_menu_admin(temp_Account);
+            menu.setVisible(true);
+            this.setVisible(false);
+
+        } else if (temp_Account.getPriv().charAt(2) == '1' || temp_Account.getPriv().charAt(3) == '1') {
+            Main_menu_operator menu = new Main_menu_operator(temp_Account);
+            menu.setVisible(true);
+            this.setVisible(false);
+        }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        temp = new Roundabout();
+
+        temp_dir_N = new Direction("Error", "Error", 0);
+        temp_dir_E = new Direction("Error", "Error", 0);
+        temp_dir_S = new Direction("Error", "Error", 0);
+        temp_dir_W = new Direction("Error", "Error", 0);
+
+        try {
+            mDatabase = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/roundabout_ID");
+            Roundabout_name_DB = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/roundabout_name");
+            Dir_name_DB_north = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/north_street/dir_name");
+            distence_DB_north = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/north_street/distence");
+            ID_DB_north = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/north_street/id");
+            Traffic_light_status_DB_north = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/north_street/traffic_light_status");
+
+            Dir_name_DB_east = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/east_street/dir_name");
+            distence_DB_east = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/east_street/distence");
+            ID_DB_east = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/east_street/id");
+            Traffic_light_status_DB_east = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/east_street/traffic_light_status");
+
+            Dir_name_DB_south = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/south_street/dir_name");
+            distence_DB_south = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/south_street/distence");
+            ID_DB_south = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/south_street/id");
+            Traffic_light_status_DB_south = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/south_street/traffic_light_status");
+
+            Dir_name_DB_west = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/west_street/dir_name");
+            distence_DB_west = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/west_street/distence");
+            ID_DB_west = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/west_street/id");
+            Traffic_light_status_DB_west = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/west_street/traffic_light_status");
+
+            flag_DB = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + jTextField1.getText() + "/policy/flag");
+
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    temp.setRoundabout_ID(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Roundabout_name_DB.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    temp.setRoundabout_name(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Dir_name_DB_north.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getNorth_street().setDir_name(ds.getValue(String.class));
+                    temp_dir_N.setDir_name(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            distence_DB_north.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getNorth_street().setDistence(ds.getValue(int.class));
+                    temp_dir_N.setDistence(ds.getValue(int.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Traffic_light_status_DB_north.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getNorth_street().setTraffic_light_status(ds.getValue(String.class));
+                    temp_dir_N.setTraffic_light_status(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Dir_name_DB_east.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getEast_street().setDir_name(ds.getValue(String.class));
+                    temp_dir_E.setDir_name(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            distence_DB_east.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getEast_street().setDistence(ds.getValue(int.class));
+                    temp_dir_E.setDistence(ds.getValue(int.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Traffic_light_status_DB_east.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getEast_street().setTraffic_light_status(ds.getValue(String.class));
+                    temp_dir_E.setTraffic_light_status(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Dir_name_DB_south.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getSouth_street().setDir_name(ds.getValue(String.class));
+                    temp_dir_S.setDir_name(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            distence_DB_south.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    // temp.getSouth_street().setDistence(ds.getValue(int.class));
+                    temp_dir_S.setDistence(ds.getValue(int.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Traffic_light_status_DB_south.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getSouth_street().setTraffic_light_status(ds.getValue(String.class));
+                    temp_dir_S.setTraffic_light_status(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Dir_name_DB_west.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getWest_street().setDir_name(ds.getValue(String.class));
+                    temp_dir_W.setDir_name(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            distence_DB_west.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getWest_street().setDistence(ds.getValue(int.class));
+                    temp_dir_W.setDistence(ds.getValue(int.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            Traffic_light_status_DB_west.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getWest_street().setTraffic_light_status(ds.getValue(String.class));
+                    //temp.West_street.setTraffic_light_status(ds.getValue(String.class));
+                    temp_dir_W.setTraffic_light_status(ds.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+
+            flag_DB.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot ds) {
+                    //temp.getWest_street().setTraffic_light_status(ds.getValue(String.class));
+                    //temp.West_street.setTraffic_light_status(ds.getValue(String.class));
+                    temp.setFlag(ds.getValue(Boolean.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError de) {
+                }
+            });
+            Thread.sleep(6000);
+
+            current_roundabout = new Roundabout(temp.getRoundabout_ID(), temp.getRoundabout_name(), temp_dir_N, temp_dir_E, temp_dir_S, temp_dir_W);
+
+//            System.out.println(current_roundabout.getRoundabout_ID());
+//            System.out.println(current_roundabout.getRoundabout_name());
+            if (current_roundabout.getNorth_street().distence == 0) {
+                north_lable.setBackground(Color.GREEN);
+            } else {
+                north_lable.setBackground(Color.RED);
+            }
+
+            if (current_roundabout.getEast_street().distence == 0) {
+                east_lable.setBackground(Color.GREEN);
+            } else {
+                east_lable.setBackground(Color.RED);
+            }
+
+            if (current_roundabout.getSouth_street().distence == 0) {
+                south_lable.setBackground(Color.GREEN);
+            } else {
+                south_lable.setBackground(Color.RED);
+            }
+
+            if (current_roundabout.getWest_street().distence == 0) {
+                west_lable.setBackground(Color.GREEN);
+            } else {
+                west_lable.setBackground(Color.RED);
+            }
+
+        } catch (InterruptedException ex) {
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            
+            Component frame = null;
+                JOptionPane.showMessageDialog(frame,
+                        "The Auto mode is going to stop because you are going to use manual mode");
+            Manual_mode m = new Manual_mode(temp_Account , temp);
+            m.setVisible(true);
+
+        } catch (InterruptedException ex) {
+
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+                
+            mDatabase = FirebaseDatabase.getInstance().getReference().child("Database/Roundabouts/" + current_roundabout.Roundabout_ID + "/policy/flag");
+
+            mDatabase.setValue(true, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError de, DatabaseReference dr) {
+                }
+            });
+            temp.setFlag(true);
+            
+             Component frame = null;
+                JOptionPane.showMessageDialog(frame,
+                        "The Auto mode is going to take care of the traffic ^_^");
+            
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,8 +506,20 @@ public class View_map extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel east_lable;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel north_lable;
+    private javax.swing.JLabel south_lable;
+    private javax.swing.JLabel west_lable;
     // End of variables declaration//GEN-END:variables
 }
